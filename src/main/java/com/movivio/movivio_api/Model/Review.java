@@ -12,8 +12,10 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+    @Column(nullable = false)
     private int rating;
     private LocalDateTime createdAt;
+    @Column(nullable = false)
     private String comment;
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -22,7 +24,7 @@ public class Review {
     @JoinColumn(name = "content_id")
     private Content content;
 
-    public Review(){};
+    public Review(){}
 
     //GET
 

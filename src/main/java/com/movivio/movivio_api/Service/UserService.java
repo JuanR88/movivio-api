@@ -23,16 +23,16 @@ public class UserService {
 
     public void guardarUsuario(User user){
         user.setCreatedAt(LocalDateTime.now());
-        /**if (user.getUsername()==null || user.getUsername().isEmpty()|| user.getUsername().length() <= 4){
+        if (user.getUsername()==null || user.getUsername().isEmpty()|| user.getUsername().length() <= 4){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Insertar usuario mayor de 4 caracteres");
-        }*/
-        /**if (user.getEmail()==null || !user.getEmail().contains("@")|| !user.getEmail().contains(".")){
+        }
+        if (user.getEmail()==null || !user.getEmail().contains("@")|| !user.getEmail().contains(".")){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Insertar email");
         }
         if (user.getPassword()==null || user.getPassword().length() < 5 || (!user.getPassword().matches("^(?=.*[A-Za-z])(?=.*\\d).+$"))){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "La password tiene que tener numeros letras y minimo 5 caracteres");
-        }*/
+        }
         userRepository.save(user);
     }
 

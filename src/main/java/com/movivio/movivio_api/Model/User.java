@@ -1,10 +1,8 @@
 package com.movivio.movivio_api.Model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -14,15 +12,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
+    @Column(nullable = false)
     private String username;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;//UNIQUE
     //Para que no me salga la password en el json
     //@JsonIgnore
+    @Column(nullable = false)
     private String password;
     private LocalDateTime createdAt;
 
-    public User(){};
+    public User(){}
 
 
 

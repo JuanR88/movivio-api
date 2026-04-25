@@ -74,7 +74,7 @@ public class ContentService {
             resultados.add(contenedorContentWithRatin);
 
         }
-        Collections.sort(resultados, new Comparator<ContentWithRating>() {
+        resultados.sort(new Comparator<ContentWithRating>() {
             @Override
             public int compare(ContentWithRating r1, ContentWithRating r2) {
                 return Double.compare(r2.getMedia(), r1.getMedia());

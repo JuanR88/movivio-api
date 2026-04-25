@@ -3,10 +3,13 @@ package com.movivio.movivio_api.Controller;
 import com.movivio.movivio_api.Model.Content;
 import com.movivio.movivio_api.Service.ContentService;
 import com.movivio.movivio_api.dto.ContentWithRating;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ContentController {
     private final ContentService contentService;
@@ -24,8 +27,9 @@ public class ContentController {
      Guardar content
      */
     @PostMapping("/content")
-    public void registrarContent(@RequestBody Content content){
-        contentService.guardarContent(content);
+    public ResponseEntity<String> registrarContent(@RequestBody Content content){
+        String mensaje = contentService.guardarContent(content);
+        return ResponseEntity.status(HttpStatus.CREATED).body(mensaje);
     }
 
     /**

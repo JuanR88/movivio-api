@@ -52,30 +52,33 @@ public class ReviewService {
     }
 
     public List<ReviewUserResponse> reviewByUser(Long userId){
-        User user = userRepository.findById(userId).orElse(null);
-        if(user==null) {
+        List<Review>reviews=reviewRepository.findByUserId(userId);
+        if(reviews.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
         }
-        List<Review>reviews=reviewRepository.findByUser(user);
+
         List<ReviewUserResponse> listaUsuariosReview =new ArrayList<>();
         for(int i= 0;i<reviews.size();i++){
             ReviewUserResponse contenedorReviewUserResponse = new ReviewUserResponse();
             Review listadoReview = reviews.get(i);
-            contenedorReviewUserResponse.setComment(listadoReview.getComment());
-            contenedorReviewUserResponse.setRating(listadoReview.getRating());
-            contenedorReviewUserResponse.setCreatedAt(listadoReview.getCreatedAt());
-            contenedorReviewUserResponse.setUsername(listadoReview.getUser().getUsername());
-            contenedorReviewUserResponse.setUserId(listadoReview.getUser().getId());
-            contenedorReviewUserResponse.setTitle(listadoReview.getContent().getTitle());
+            contenedorReviewUserResponse.setContentId(listadoReview.getContent().getId());
+            contenedorReviewUserResponse.setComment(listadoReview.getComment());/**/
+            contenedorReviewUserResponse.setRating(listadoReview.getRating());/**/
+            contenedorReviewUserResponse.setCreatedAt(listadoReview.getCreatedAt());/**/
+            contenedorReviewUserResponse.setUsername(listadoReview.getUser().getUsername());/**/
+            contenedorReviewUserResponse.setUserId(listadoReview.getUser().getId());/**/
+            contenedorReviewUserResponse.setTitle(listadoReview.getContent().getTitle());/**/
             listaUsuariosReview.add(contenedorReviewUserResponse);
         }
         return listaUsuariosReview;
 
     }
     public List<ReviewUserResponse> reviewByContent(long contentId){
-        Content content= contentRepository.findById(contentId).orElse(null);
-        if(content==null){throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Comentario no encontrado");}
-        List<Review>reviews=reviewRepository.findByContent(content);
+        // En vez de traernos el objeto entero, nos traemos solo el contentId
+        List<Review> reviews =  reviewRepository.findByContentId(contentId);
+        if(reviews.isEmpty())
+        {throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Comentario no encontrado");
+        }
         reviews.sort(new Comparator<Review>() {
             @Override
             public int compare(Review o1, Review o2) {
@@ -86,6 +89,7 @@ public class ReviewService {
         for (int i = 0; i< reviews.size();i++){
             ReviewUserResponse contenedorReviewUserResponse=new ReviewUserResponse();
             Review listadoReview= reviews.get(i);
+            contenedorReviewUserResponse.setContentId(listadoReview.getContent().getId());
             contenedorReviewUserResponse.setTitle(listadoReview.getContent().getTitle());
             contenedorReviewUserResponse.setUsername(listadoReview.getUser().getUsername());
             contenedorReviewUserResponse.setUserId(listadoReview.getUser().getId());

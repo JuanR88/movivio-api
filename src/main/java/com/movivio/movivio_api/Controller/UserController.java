@@ -4,7 +4,6 @@ import com.movivio.movivio_api.Model.User;
 import com.movivio.movivio_api.Service.UserService;
 import com.movivio.movivio_api.dto.UserResponse;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

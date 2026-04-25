@@ -14,7 +14,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findByContent(Content content);
 
     //Vemos todas las review de un usuario
-    List<Review> findByUser(User user);
+    //List<Review> findByUser(User user);
 
     // Traemos el Id de content
     List<Review> findByContentId( Long contentId );

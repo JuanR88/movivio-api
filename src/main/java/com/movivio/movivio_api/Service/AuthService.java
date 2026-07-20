@@ -19,7 +19,7 @@ public class AuthService {
     }
 
     public void guardarRegistro(RegisterRequest request){
-       User user = userRepository.findByEmail(request.getEmail());
+       User user = userRepository.findByEmail(request.getEmail()); //Buscar usuario por email
        if (user != null ) {
            throw new UsuarioYaExisteException(
                    "Ya existe una cuenta con ese email"

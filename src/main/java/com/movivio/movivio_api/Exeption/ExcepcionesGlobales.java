@@ -16,8 +16,11 @@ public class ExcepcionesGlobales {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya hay una cuenta con este Email ");
     }
     @ExceptionHandler(UsuarioYaExisteException.class)
-    public ResponseEntity<String> usuarioYaExiste(
+    public ResponseEntity<RespuestaError> usuarioYaExiste(
             UsuarioYaExisteException ex){
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+        RespuestaError respuesta = new RespuestaError(
+                409,"Conflict", ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta);
     }
 }

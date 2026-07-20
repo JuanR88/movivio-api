@@ -1,16 +1,16 @@
 package com.movivio.movivio_api.dto;
 
 public class ReviewRequest {
-
+    //ATRIBUTOS
     private Long userId;
     private Long contentId;
     private int rating;
     private String comment;
-
-    public ReviewRequest(){};
+    //CONSTRUCTOR
+    public ReviewRequest(){}
 
     //Get
-    public Long getUserId(){return userId;}
+    public Long getUserId() {return userId;}
     public Long getContentId(){return contentId;}
     public int getRating() {
         return rating;

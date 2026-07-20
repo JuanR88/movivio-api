@@ -23,4 +23,12 @@ public class ExcepcionesGlobales {
         );
         return ResponseEntity.status(HttpStatus.CONFLICT).body(respuesta);
     }
+    @ExceptionHandler(CredencialesIncorrectasException.class)
+    public ResponseEntity<RespuestaError> loginIncorrecto(
+            CredencialesIncorrectasException ex){
+        RespuestaError respuesta = new RespuestaError(
+                401, "Unauthorized",ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED) .body(respuesta);
+    }
 }

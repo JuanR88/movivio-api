@@ -12,15 +12,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 public class ExcepcionesGlobales {
     @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<String>errorEmailIncorrecto(DataIntegrityViolationException ex){
+    public ResponseEntity<String>errorEmailIncorrecto(){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya hay una cuenta con este Email ");
     }
     @ExceptionHandler(UsuarioYaExisteException.class)
     public ResponseEntity<String> usuarioYaExiste(
-            UsuarioYaExisteException ex
-    ){
-        return ResponseEntity
-                .status(HttpStatus.CONFLICT)
-                .body(ex.getMessage());
+            UsuarioYaExisteException ex){
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 }

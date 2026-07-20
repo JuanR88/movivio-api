@@ -15,4 +15,12 @@ public class ExcepcionesGlobales {
     public ResponseEntity<String>errorEmailIncorrecto(DataIntegrityViolationException ex){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Ya hay una cuenta con este Email ");
     }
+    @ExceptionHandler(UsuarioYaExisteException.class)
+    public ResponseEntity<String> usuarioYaExiste(
+            UsuarioYaExisteException ex
+    ){
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(ex.getMessage());
+    }
 }

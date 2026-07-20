@@ -1,10 +1,8 @@
 package com.movivio.movivio_api.dto;
 
-import com.movivio.movivio_api.Model.Review;
-
 import java.time.LocalDateTime;
 
-public class ReviewResponse {
+public class ReviewResponse2 {
     private Long userId;
     private String username;
     private int rating;
@@ -12,7 +10,7 @@ public class ReviewResponse {
     private LocalDateTime createdAt;
 
 
-    public ReviewResponse(){}
+    public ReviewResponse2(){}
 
     //Get
 

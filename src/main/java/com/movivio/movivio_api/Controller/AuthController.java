@@ -2,6 +2,7 @@ package com.movivio.movivio_api.Controller;
 
 import com.movivio.movivio_api.Service.AuthService;
 import com.movivio.movivio_api.dto.LoginRequest;
+import com.movivio.movivio_api.dto.LoginResponse;
 import com.movivio.movivio_api.dto.RegisterRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +28,10 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Usuario guardado");
     }
     @PostMapping("/auth/login")
-    public ResponseEntity<String>login(@RequestBody LoginRequest request){
-        authService.login(request);
-        return ResponseEntity.status(HttpStatus.OK).body("Login completo");
+    public ResponseEntity<LoginResponse>login(@RequestBody LoginRequest request){
+        String token = authService.login(request);
+        LoginResponse response = new LoginResponse(token, "Bearer");
+        return  ResponseEntity.ok(response);
     }
 
 

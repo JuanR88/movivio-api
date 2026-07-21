@@ -14,10 +14,12 @@ import java.time.LocalDateTime;
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder)
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService)
     {this.userRepository=userRepository;
     this.passwordEncoder=passwordEncoder;
+    this.jwtService =jwtService;
     }
 
     public void guardarRegistro(RegisterRequest request){
@@ -34,7 +36,7 @@ public class AuthService {
            userNew.setCreatedAt(LocalDateTime.now());
            userRepository.save(userNew);
     }
-    public void login (LoginRequest request){
+    public String login (LoginRequest request){
         User user = userRepository.findByEmail(request.getEmail());
         if (user == null){
             throw new CredencialesIncorrectasException(
@@ -48,5 +50,6 @@ public class AuthService {
                     "Usuario o contraseña incorrecta"
             );
         }
+        return jwtService.generarToken(user.getEmail());
     }
 }
